@@ -16,7 +16,6 @@
 - name: Install pip
   apt:
     name: python-mysqldb
-    update_cache: yes
     state: present
 
 - name: Fetch random salts for WordPress config
