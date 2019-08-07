@@ -5,6 +5,18 @@
 - name: Add user "wordpress"
   user: name=wordpress group=wordpress home=/var/www/wordpress/
 
+- name: fetch composer installer
+  shell: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+- name: install composer
+  shell: php composer-setup.php
+
+- name: remove comper-setup.php
+  shell: php -r "unlink('composer-setup.php');"
+
+- name: set composer command
+  shell: mv composer.phar /usr/local/bin/composer
+
 - name: Download WordPress
   get_url: url=https://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/var/www/wordpress-{{ wp_version }}.tar.gz
            sha256sum="{{ wp_sha256sum }}"
