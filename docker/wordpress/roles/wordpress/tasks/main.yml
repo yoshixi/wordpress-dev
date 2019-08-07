@@ -28,6 +28,12 @@
   shell: composer create-project roots/bedrock
   args:
     chdir: /var/www/
+    creates: '/var/www/bedrock/composer.json'
+
+- name: composer install
+  shell: composer install
+  args:
+    chdir: /var/www/bedrock/
 
 - name: Change ownership of WordPress installation
   file: path=/var/www/bedrock/
