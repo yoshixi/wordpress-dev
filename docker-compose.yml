@@ -18,7 +18,7 @@ services:
        WORDPRESS_DB_HOST: db
        WORDPRESS_DB_PASSWORD: wordpress
     volumes :
-       - .:/var/www/bedrock
+       - ./bedrock:/var/www/bedrock
        - mysql_sock:/var/run/mysqld
        - ./log/nginx:/var/log/nginx
   db:
@@ -27,7 +27,7 @@ services:
       - mysql_data:/var/lib/mysql
       - mysql_sock:/var/run/mysqld
       - ./docker/mysql/conf.d/my.cnf:/etc/my.cnf
-      - ./var/log/mysql/:/var/log/mysql
+      - ./log/mysql/:/var/log/mysql
     restart: always
     expose:
       - '3306'
