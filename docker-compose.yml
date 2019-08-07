@@ -1,0 +1,44 @@
+version: '3'
+services:
+  ansible:
+    container_name: ansible
+    build: docker/ansible
+    tty: true
+    working_dir: "/var/data"
+    volumes:
+      - .:/var/data
+  wordpress:
+    container_name: ansible-on-docker_wordpress
+    build: docker/wordpress
+    depends_on:
+       - db
+    ports:
+       - "9000:80"
+    environment:
+       WORDPRESS_DB_HOST: db
+       WORDPRESS_DB_PASSWORD: wordpress
+    volumes :
+       - ./html:/var/www/html
+       - mysql_sock:/var/run/mysqld
+       - ./var/log/wordpress:/tmp/log
+       - ./var/log/nginx:/var/log/nginx
+  db:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_sock:/var/run/mysqld
+      - ./docker/mysql/conf.d/my.cnf:/etc/my.cnf
+      - ./var/log/mysql/:/var/log/mysql
+    restart: always
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+volumes:
+  mysql_sock:
+  mysql_data:
