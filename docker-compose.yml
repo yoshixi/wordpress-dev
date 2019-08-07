@@ -18,10 +18,9 @@ services:
        WORDPRESS_DB_HOST: db
        WORDPRESS_DB_PASSWORD: wordpress
     volumes :
-       - ./html:/var/www/html
+       - .:/var/www/bedrock
        - mysql_sock:/var/run/mysqld
-       - ./var/log/wordpress:/tmp/log
-       - ./var/log/nginx:/var/log/nginx
+       - ./log/nginx:/var/log/nginx
   db:
     image: mysql:5.7
     volumes:

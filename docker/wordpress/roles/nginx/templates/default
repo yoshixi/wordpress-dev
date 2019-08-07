@@ -8,7 +8,7 @@ charset UTF-8;
   server {
         listen       80 default_server;
         server_name  {{ server_hostname }};
-        root /var/www/wordpress/ ;
+        root /var/www/bedrock/web/ ;
 
   	client_max_body_size 64M;
 

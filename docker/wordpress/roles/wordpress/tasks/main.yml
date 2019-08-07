@@ -17,30 +17,29 @@
 - name: set composer command
   shell: mv composer.phar /usr/local/bin/composer
 
-- name: Download WordPress
-  get_url: url=https://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/var/www/wordpress-{{ wp_version }}.tar.gz
-           sha256sum="{{ wp_sha256sum }}"
+- name: create wordpress owner directory
+  file: path=/var/www/bedrock
+        state=directory
+        owner=wordpress
+        group=wordpress
+        mode=0774
 
-- name: Extract WordPress
-  unarchive: src=/var/www/wordpress-{{ wp_version }}.tar.gz remote_src=True
-             dest=/var/www owner=wordpress group=wordpress
+- name: set composer command
+  shell: composer create-project roots/bedrock
+  args:
+    chdir: /var/www/
+
+- name: Change ownership of WordPress installation
+  file: path=/var/www/bedrock/
+        owner='www-data'
+        group='www-data'
+        state=directory
+        recurse=yes
 
 - name: Install pip
   apt:
     name: python-mysqldb
     state: present
-
-- name: Fetch random salts for WordPress config
-  local_action: uri url=https://api.wordpress.org/secret-key/1.1/salt/ return_content=yes
-  register: "wp_salt"
-  become: no
-
-- name: Copy WordPress config file
-  template: src=wp-config.php dest=/var/www/wordpress/
-            owner=wordpress group=wordpress
-
-- name: Change ownership of WordPress installation
-  file: path=/var/www/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
 
 - name: Start php-fpm Service
   service: name=php7.0-fpm state=started enabled=yes
