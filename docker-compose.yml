@@ -21,7 +21,7 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/data:/var/lib/mysql
       - mysql_sock:/var/run/mysqld
       - ./docker/mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./log/mysql/:/var/log/mysql
@@ -38,4 +38,3 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 volumes:
   mysql_sock:
-  mysql_data:
