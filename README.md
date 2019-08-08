@@ -1,5 +1,9 @@
 # WordPress + docker-compose + composer + Ansible
 
+## やりたいこと
+wordpreee を　*RDMS + Cloud Compute(debian環境)* で公開するとなった時に、
+debian 環境を本番と開発どちらもAnsibleで作れるようにしたい。
+
 ## ディレクトリ構成
 ```
 .
