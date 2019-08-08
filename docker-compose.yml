@@ -3,10 +3,12 @@ services:
   ansible:
     container_name: ansible
     build: docker/ansible
+    environment:
+      HOME: /root
     tty: true
-    working_dir: "/var/data"
+    working_dir: /root
     volumes:
-      - .:/var/data
+      - ./ansible:/root/ansible
   wordpress:
     container_name: ansible-on-docker_wordpress
     build: docker/wordpress

@@ -17,7 +17,8 @@ RUN mkdir /run/sshd
 # rootでログインできるようにする
 RUN sed -ri 's/^#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN echo "root:root" | chpasswd
+RUN sed -ri 's/^UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+RUN passwd -d root
 
 EXPOSE 22
 EXPOSE 80
@@ -26,4 +27,4 @@ EXPOSE 443
 COPY . /hoge
 CMD ["/usr/sbin/sshd", "-D"]
 
-CMD ansible-playbook -i /hoge/hosts /hoge/site.yml --connection=local && tail -f /dev/null
+# CMD ansible-playbook -i /hoge/hosts /hoge/site.yml --connection=local && tail -f /dev/null
