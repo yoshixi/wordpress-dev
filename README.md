@@ -5,10 +5,6 @@
 .
 ├── README.md
 ├── docker
-│   ├── ansible
-│   │   └── Dockerfile      ansibleのDocerfile
-│   └── target
-│       └── Dockerfile      targetのDockerfile
 ├── docker-compose.yml      docker-composeファイル
 ├── inventry.ini            hostsファイル
 └── playbook.yml            playbookファイル
