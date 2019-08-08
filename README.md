@@ -3,25 +3,22 @@
 ## ディレクトリ構成
 ```
 .
-├── README.md
-├── docker
+├── bedrock           wordpressのソースファイル群
+├── ansible           wordpressインスタンスのansible構成ファイル群
+├── docker                 docer-composeで使うfile
 ├── docker-compose.yml      docker-composeファイル
-├── inventry.ini            hostsファイル
-└── playbook.yml            playbookファイル
+└── README.md            playbookファイル
 ```
 
-## 使い方
+## 開発環境構築
 1. Dockerコンテナの起動
 ```
+docker-compose build
 docker-compose up
+
+# ansible のコンテナに入る
+docker-compose exec ansible bash
+
+# ansibleを実行
+ansible-playbook ansible/site.yml -i ansible/hosts.dev && tail -f /dev/null
 ```
-
-[【Ansible】DockerでAnsibleハンズオン](https://qiita.com/Naoto9282/items/39eeefa5de652b857372)
-
-## memo
-
-**実行コマンド**
-ansible-playbook -i docker/wordpress/hosts docker/wordpress/site.yml --connection=local && tail -f /dev/null
-
-**編集ファイル**
-- wp-config
