@@ -18,6 +18,8 @@ services:
        - ./bedrock:/var/www/bedrock
        - mysql_sock:/var/run/mysqld
        - ./log/nginx:/var/log/nginx
+    tty: true
+
   db:
     image: mysql:5.7
     volumes:

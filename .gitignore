@@ -1,4 +1,4 @@
-db
+docker/mysql/data
 log
 # Application
 # Application
