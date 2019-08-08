@@ -14,7 +14,7 @@ services:
        - db
     ports:
        - "9000:80"
-    volumes :
+    volumes   :
        - ./bedrock:/var/www/bedrock
        - mysql_sock:/var/run/mysqld
        - ./log/nginx:/var/log/nginx
