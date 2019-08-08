@@ -1,4 +1,4 @@
-# docker-ansible
+# WordPress + docker-compose + composer + Ansible
 
 ## ディレクトリ構成
 ```
